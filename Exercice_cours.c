@@ -1,18 +1,33 @@
 #include <stdio.h>
 
-int fct(int t[], int len)
+void fct1(int *pvar)
 {
-    int s=0, i;
-    for(i=0; i<len; i++)
-    {
-        s += t[i];
-        printf("%d %d\n",s,i);
-    }
-    return s;
+    (*pvar)++;
 }
+
+void fct2(int var)
+{
+    var+=2;
+}
+
 int main()
 {
-    int t1[]={1,2,3}, t2[5]={0};
-    int s1=fct(t1,3);
-    printf("%d, %d, %d\n", s1, fct(t1,2), fct(t2,5));
+    int n=3;
+    printf("%d, ", n);
+
+    fct1(&n);
+    printf("%d, ", n);
+
+    fct2(n);
+    printf("%d, ", n);
+
+    fct1(&n);
+    printf("%d, ", n);
+
+    int *p=&n;
+    fct1(p);
+    printf("%d, ", n);
+    
+    fct2(*p);
+    printf("%d\n", n);
 }
