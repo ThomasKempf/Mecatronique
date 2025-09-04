@@ -1,0 +1,2 @@
+## Question 
+le code renvoie: 3, 3.1416
