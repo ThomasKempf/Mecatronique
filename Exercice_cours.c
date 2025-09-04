@@ -1,33 +1,14 @@
 #include <stdio.h>
-
-void fct1(int *pvar)
-{
-    (*pvar)++;
-}
-
-void fct2(int var)
-{
-    var+=2;
-}
+#include <stdint.h> // pour la definition de uint8_t
 
 int main()
 {
-    int n=3;
-    printf("%d, ", n);
-
-    fct1(&n);
-    printf("%d, ", n);
-
-    fct2(n);
-    printf("%d, ", n);
-
-    fct1(&n);
-    printf("%d, ", n);
-
-    int *p=&n;
-    fct1(p);
-    printf("%d, ", n);
-    
-    fct2(*p);
-    printf("%d\n", n);
+    uint8_t a=0b00100110;
+    uint8_t b=0b01001011;
+    printf("a=%d, b=%d\n", a, b);
+    printf("%d, ", a>>1);
+    printf("%d, ", a>>2);
+    printf("%d, ", a&b);
+    printf("%d, ", a&0x0F);
+    printf("%d\n", (b&0x0F)<<1);
 }
