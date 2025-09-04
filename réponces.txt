@@ -29,3 +29,13 @@ la fonctione renvoie
 a=38, b=75
 19, 9, 2, 6, 22
 la fonction manipule bit par bit
+"a>>1" divise par 10^1 donc décale les fiffre à droite
+masque and "a&b" masque ou "a|b"
+
+# Question 9
+le scripte renvoie:
+A : n=10, p=10, q=10, r=1
+B : n=15, p=10, q=5
+C : n=15, p=11, q=10
+D : n=16, p=11, q=15
+
