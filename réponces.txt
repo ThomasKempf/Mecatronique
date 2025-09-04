@@ -3,3 +3,11 @@ le code renvoie: 3, 3.1416
 
 # Question 2
 le code renvoie 5 3, la première globale la seconde non
+
+# Question 3
+l'expression simplifier est: z = a + b ou z = b + a
+
+# Question 4
+avec le static, il renvoie 1, 2, 3, 4
+sans le static, il renvoie 1, 1, 1, 1
+static permet de garder la valeur en mémoir et de l'incrémenté

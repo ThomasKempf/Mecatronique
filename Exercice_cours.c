@@ -1,14 +1,19 @@
 #include <stdio.h>
 
-int n=5;
+long incr();
 
-void fct(int p)
-{
-    printf("%d %d\n", n, p);
+int main(int argc, char *argv[]) {
+    printf("%ld, ", incr());
+    printf("%ld, ", incr());
+    printf("%ld, ", incr());
+    printf("%ld\n", incr());
+
+    return 0;
 }
+ 
+long incr() {
+    static long nombre = 0;
 
-int main()
-{
-    int n=3;
-    fct(n);
+    nombre++;
+    return nombre;
 }
