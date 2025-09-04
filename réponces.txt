@@ -1,2 +1,5 @@
-## Question 
+# Question 1 
 le code renvoie: 3, 3.1416
+
+# Question 2
+le code renvoie 5 3, la première globale la seconde non

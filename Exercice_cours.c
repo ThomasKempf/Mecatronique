@@ -1,8 +1,14 @@
 #include <stdio.h>
+
+int n=5;
+
+void fct(int p)
+{
+    printf("%d %d\n", n, p);
+}
+
 int main()
 {
     int n=3;
-    float pi=3.1415926;
-    printf("%d, ", n);
-    printf("%.4f", pi);
+    fct(n);
 }
