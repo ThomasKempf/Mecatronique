@@ -11,3 +11,9 @@ l'expression simplifier est: z = a + b ou z = b + a
 avec le static, il renvoie 1, 2, 3, 4
 sans le static, il renvoie 1, 1, 1, 1
 static permet de garder la valeur en mémoir et de l'incrémenté
+
+# Question 5
+le code renvoie ces valeur la:
+0, 1, 2, 3, 
+Valeur : 4
+"define" permet de definir quelque chose au compilateur directement pour l'interpreter dans la suite

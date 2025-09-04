@@ -1,19 +1,16 @@
 #include <stdio.h>
 
-long incr();
+#define N_ITER 4
+#define AFFICHE(x) printf("Valeur : %d\n", x)
 
-int main(int argc, char *argv[]) {
-    printf("%ld, ", incr());
-    printf("%ld, ", incr());
-    printf("%ld, ", incr());
-    printf("%ld\n", incr());
-
-    return 0;
-}
- 
-long incr() {
-    static long nombre = 0;
-
-    nombre++;
-    return nombre;
+int main()
+{
+    int i=0;
+    while(i<N_ITER)
+    {
+    printf("%d, ", i);
+    i++;
+    }
+    printf("\n");
+    AFFICHE(i);
 }
