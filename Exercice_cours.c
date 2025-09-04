@@ -1,16 +1,18 @@
 #include <stdio.h>
 
-#define N_ITER 4
-#define AFFICHE(x) printf("Valeur : %d\n", x)
-
+int fct(int t[], int len)
+{
+    int s=0, i;
+    for(i=0; i<len; i++)
+    {
+        s += t[i];
+        printf("%d %d\n",s,i);
+    }
+    return s;
+}
 int main()
 {
-    int i=0;
-    while(i<N_ITER)
-    {
-    printf("%d, ", i);
-    i++;
-    }
-    printf("\n");
-    AFFICHE(i);
+    int t1[]={1,2,3}, t2[5]={0};
+    int s1=fct(t1,3);
+    printf("%d, %d, %d\n", s1, fct(t1,2), fct(t2,5));
 }
