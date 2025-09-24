@@ -1,0 +1,41 @@
+# Question 1 
+le code renvoie: 3, 3.1416
+
+# Question 2
+le code renvoie 5 3, la première globale la seconde non
+
+# Question 3
+l'expression simplifier est: z = a + b ou z = b + a
+
+# Question 4
+avec le static, il renvoie 1, 2, 3, 4
+sans le static, il renvoie 1, 1, 1, 1
+static permet de garder la valeur en mémoir et de l'incrémenté
+
+# Question 5
+le code renvoie ces valeur la:
+0, 1, 2, 3, 
+Valeur : 4
+"define" permet de definir quelque chose au compilateur directement pour l'interpreter dans la suite
+
+# Question 6
+la fonction renvoie # Question 5
+
+# Question 7
+la fonction renvoie 3, 4, 4, 5, 6, 6
+
+# Question 8
+la fonctione renvoie 
+a=38, b=75
+19, 9, 2, 6, 22
+la fonction manipule bit par bit
+"a>>1" divise par 10^1 donc décale les fiffre à droite
+masque and "a&b" masque ou "a|b"
+
+# Question 9
+le scripte renvoie:
+A : n=10, p=10, q=10, r=1
+B : n=15, p=10, q=5
+C : n=15, p=11, q=10
+D : n=16, p=11, q=15
+
