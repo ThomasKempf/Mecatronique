@@ -26,3 +26,21 @@ La fonction **check_neighbors** est constituer de deux boucle for pour tester ch
             } 
         } 
     }
+<img src="./Question4.png" alt="Question 4" width="600">
+
+
+## Question 5
+l'ajout de la cendre peut être observer avec les arobase qui ne sont pas à fond rouge
+
+    FOR_YX {        //loop through each cell
+    switch (univ[y][x]) {
+        case fire:
+            next_univ[y][x] = cendre;
+            break;
+        case empty:
+            if (CHANCE(TREE_PROB)) next_univ[y][x] = tree;
+            break;
+        case cendre:
+            next_univ[y][x] = empty;
+            break;
+<img src="./Question4.png" alt="Question 5" width="600">
