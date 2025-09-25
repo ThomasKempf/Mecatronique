@@ -43,4 +43,4 @@ l'ajout de la cendre peut être observer avec les arobase qui ne sont pas à fon
         case cendre:
             next_univ[y][x] = empty;
             break;
-<img src="./Question4.png" alt="Question 5" width="600">
+<img src="./Question5.png" alt="Question 5" width="600">
