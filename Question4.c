@@ -1,12 +1,23 @@
 #include <stdio.h>
 #include <string.h>
-#include <windows.h>
 #include "sha-256.h"
 
 
-#define nbrCaratere 3
-char pswdTested[nbrCaratere+1] = "aaa\0";
+#define nbrCaratere 5
+char pswdTested[nbrCaratere+1];
+char pswdEnd[nbrCaratere+1];
 
+
+void initialisation()
+{
+    for (int i = 0; i < nbrCaratere; i++)
+    {
+        pswdTested[i] = 'a';
+        pswdEnd[i] = 'z';
+    }
+    pswdTested[nbrCaratere] = '\0';
+    pswdEnd[nbrCaratere] = '\0';
+}
 
 void incrementerPswd()
 {
@@ -31,13 +42,11 @@ void incrementerPswd()
 
 int main() 
 {
-    char hashToFind[] = "fa690b82061edfd2852629aeba8a8977b57e40fcb77d1a7a28b26cba62591204";
+    char hashToFind[] = "1cc4af005a69f3e80dbf0ab833d8b86d9d9c6ebfc40ba8b6c96503d265aefe6b";
     pswdTested[nbrCaratere] = '\0';
-    char input[] = "thomas";
     char hashString[65];
-    char pswdEnd[] = "zzz\0";
-    printf("test : %s\n",pswdEnd);
-    
+    initialisation();
+
     while (strcmp(pswdTested,pswdEnd) != 0)
     {
         get_sha256(hashString,pswdTested);
@@ -46,7 +55,6 @@ int main()
             printf("Le mot de passe est : %s",pswdTested);
             return 0;
         }
-        printf("test : %s\n",pswdTested);
         incrementerPswd();
     }
     printf("pas trouvée");
