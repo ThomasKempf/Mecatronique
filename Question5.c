@@ -43,7 +43,7 @@ void incrementerPswd()
 
 int testPswd()
 {
-    char hashToFind[] = "38f6c594ab58aad97993e44802be2491fc27bb00d1d6003ade56f2605c58b435";
+    char hashToFind[] = "21d0ec6f2ed95c050aabbba67c1e3ce78865199d200735498b377898d95e189f";
     char hashString[65];
     while (strcmp(pswdTested,pswdEnd) != 0)
     {

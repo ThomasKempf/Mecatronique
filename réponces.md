@@ -52,3 +52,5 @@ Sur la base de la question 4 on a realiser une boucle for qui permet de chercher
     r
     hey
     sflkn
+    bqjdg
+    dghvgg
