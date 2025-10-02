@@ -33,3 +33,22 @@ Pour traiter des mots de passe à plus d'une lettre, on à décider de créer un
 }
 
 <img src="./Question4.png" alt="Question 3" width="300">
+
+## Question 5
+Sur la base de la question 4 on a realiser une boucle for qui permet de chercher des mots de passe de plus en plus long. Pour cela on reitere la fonction *testPswd()* en augmentant la taille du mot de passe cherchee a travers *nbrCaratere*. A chaque iteration, on reinitialise le premier et le dernier mot de passe recherché.
+
+    for (; nbrCaratere <= tailleMax; nbrCaratere++)
+    {
+        initialisation();
+        if (testPswd() == 0)
+        {
+            return 0;
+        }
+        printf("on a teste tous les mots de passe de taille %d\n",nbrCaratere);
+    }
+
+## Mot de passe trouvés: 
+
+    r
+    hey
+    sflkn
