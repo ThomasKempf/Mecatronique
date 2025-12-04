@@ -49,7 +49,7 @@ for (int i=0;i <= 90; i++)
 
 ## Partie 2
 
-### Etape a
+### Etape a - b
 En appliquant le theoreme d'Al-kashi on trouve les angles Gama et Beta. On calcule O1 et O2 avec ces angles
 
 <img src="./alkashi.png" alt="Alkashi" width="300">
@@ -64,3 +64,14 @@ void calcul_angles()
   O2 = omega + gama;
 }
 ```
+
+### Etape c
+en testant notre programme avec x = 25 et y = 0 nous obtenons:
+
+    beta:0.00
+    gama:0.00
+    omega:0.00
+    x:25.00
+    y:0.00
+
+ce qui correspond à la réalité
