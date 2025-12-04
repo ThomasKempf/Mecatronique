@@ -22,29 +22,36 @@ void calcule_position()
   y = L1*sin(O1*(PI / 180.0))+L2*sin((O1+O2)*(PI / 180.0));
 }
 
+
 int calcul_omega()
 {
-  return asin(y/(sqrt((y*y)+(x*x))))*(180.0 / M_PI);
+  return asin(y/(sqrt((y*y)+(x*x))))*(180.0 / PI);
 }
 
 
 int calcul_beta()
 {
-  return acos((x*x+y*y+L1*L1-L2*L2)/(2*L1*(x*x+y*y)));
+  return acos((x*x+y*y+L1*L1-L2*L2)/(2*L1*sqrt(x*x+y*y)))*(180.0 / PI);
 }
 
 
 int calcul_gama()
 {
-  return acos((x*x+y*y-L1*L1+L2*L2)/(2*L2*(x*x+y*y)));
+  return acos((x*x+y*y-L1*L1+L2*L2)/(2*L2*sqrt(x*x+y*y)))*(180.0 / PI);
 }
 
 
 void calcul_angles()
 {
-  int beta = calcul_beta();
-  int gama = calcul_gama();
-  int omega = calcul_omega();
+  float beta = calcul_beta();
+  Serial.print("beta:"); 
+  Serial.println(beta);
+  float gama = calcul_gama();
+  Serial.print("gama:"); 
+  Serial.println(gama);
+  float omega = calcul_omega();
+  Serial.print("omega:"); 
+  Serial.println(omega);
   O1 = omega - beta;
   O2 = omega + gama;
 }
@@ -52,15 +59,19 @@ void calcul_angles()
 
 void print_resultat() {
   Serial.print("x:"); 
-  Serial.print(x);
-  Serial.print("\t");  // Tabulation pour séparer les variables
+  Serial.println(x);
   Serial.print("y:");
   Serial.println(y);
+  Serial.print("O1:"); 
+  Serial.println(O1);
+  Serial.print("O2:");
+  Serial.println(O2);
 
 }
 
 
-void loop() {
+void representation_position_pince()
+{
   for (int i=0;i <= 90; i++)
   {
     for (int j=0;j <= 180; j++)
@@ -72,6 +83,34 @@ void loop() {
       delay(10);
     }
   }
-  //
+}
 
+
+void calcul_yx_cercle(float rayon,float angle)
+ {
+  y = 4;
+  x = 12;
+  float xr = rayon*cos(angle*(PI / 180.0));
+  float yr = rayon*sin(angle*(PI / 180.0));
+  x = x + xr;
+  y = y = yr;
+ }
+
+
+void representation_cercle()
+{
+  float rayon = 7;
+  float pas = 3.6;
+  for (int i=0;i <= 360; i++)
+  {
+    calcul_yx_cercle(rayon,i);
+    p.Plot();
+    delay(pas); // 0.1s par valeur
+  }
+}
+
+
+void loop() 
+{
+  representation_cercle();
 }

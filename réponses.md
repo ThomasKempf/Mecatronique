@@ -75,3 +75,21 @@ en testant notre programme avec x = 25 et y = 0 nous obtenons:
     y:0.00
 
 ce qui correspond à la réalité
+
+
+### Etape d
+Nous avons ensuite écris un programme permetant de décrire un cercle de rayon 7cm
+```c
+void representation_cercle()
+{
+  float rayon = 7;
+  float pas = 3.6;
+  for (int i=0;i <= 360; i++)
+  {
+    calcul_yx_cercle(rayon,i);
+    p.Plot();
+    delay(pas); // 0.1s par valeur
+  }
+}
+```
+<img src="./rond.png" alt="rond" width="300">
