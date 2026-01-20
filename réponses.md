@@ -109,5 +109,7 @@ void calcul_angles()
 ```
 <img src="./O1.png" alt="rond" width="300">
 <img src="./O2.png" alt="rond" width="300">
+
 pour finir nous avons vérifié la coherence de O1 et O2 en retracant un cercle en utilisant la methode directe
+
 <img src="./verif_angle.png" alt="rond" width="300">
