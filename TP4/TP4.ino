@@ -5,13 +5,13 @@ float L1 = 15; // cm
 float L2 = 10; // cm
 float O1 = 15; // °
 float O2 = 10; // °
-float x, y;
+float x, y , t;
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(115200);
   p.Begin();
-  p.AddXYGraph("Position Robot", 16001, "X", x,"Y",y);  // graphe pour x
+  p.AddXYGraph("Position Robot", 16001, "T", t,"O2",O2);  // graphe pour x
   delay(1000);
 }
 
@@ -44,16 +44,12 @@ int calcul_gama()
 void calcul_angles()
 {
   float beta = calcul_beta();
-  Serial.print("beta:"); 
-  Serial.println(beta);
   float gama = calcul_gama();
-  Serial.print("gama:"); 
-  Serial.println(gama);
   float omega = calcul_omega();
-  Serial.print("omega:"); 
-  Serial.println(omega);
   O1 = omega - beta;
-  O2 = omega + gama;
+  float z;
+  z = 180-gama-beta;
+  O2 = 180 - z;
 }
 
 
@@ -93,7 +89,7 @@ void calcul_yx_cercle(float rayon,float angle)
   float xr = rayon*cos(angle*(PI / 180.0));
   float yr = rayon*sin(angle*(PI / 180.0));
   x = x + xr;
-  y = y = yr;
+  y = y + yr;
  }
 
 
@@ -101,11 +97,15 @@ void representation_cercle()
 {
   float rayon = 7;
   float pas = 3.6;
+  t = 0;
   for (int i=0;i <= 360; i++)
   {
     calcul_yx_cercle(rayon,i);
+    calcul_angles();
+    calcule_position();
     p.Plot();
     delay(pas); // 0.1s par valeur
+    t = t + 0.01;
   }
 }
 

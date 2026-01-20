@@ -93,3 +93,21 @@ void representation_cercle()
 }
 ```
 <img src="./rond.png" alt="rond" width="300">
+
+par la suite nous avons calculer O1 et O2 à partir des valeurs x y  donnée par le cercle en utilisant calcul_angles() . C'est là que nous avons remarqué une erreur dans le calcul de O2 que nous avons corrigé:
+```c
+void calcul_angles()
+{
+  float beta = calcul_beta();
+  float gama = calcul_gama();
+  float omega = calcul_omega();
+  O1 = omega - beta;
+  float z;
+  z = 180-gama-beta;
+  O2 = 180 - z;
+}
+```
+<img src="./O1.png" alt="rond" width="300">
+<img src="./O2.png" alt="rond" width="300">
+pour finir nous avons vérifié la coherence de O1 et O2 en retracant un cercle en utilisant la methode directe
+<img src="./verif_angle.png" alt="rond" width="300">
