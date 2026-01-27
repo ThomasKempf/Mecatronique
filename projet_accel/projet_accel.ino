@@ -2,6 +2,9 @@
 #include <Wire.h>//https://www.arduino.cc/en/reference/wire
 #include <Adafruit_MPU6050.h>//https://github.com/adafruit/Adafruit_MPU6050
 #include <Adafruit_Sensor.h>//https://github.com/adafruit/Adafruit_Sensor
+#include <math.h>
+
+float ax,ay,az,gx,gy,gz,t;
 
 //Objects
 Adafruit_MPU6050 mpu;
@@ -24,6 +27,12 @@ void setup() {
 
 void loop() {
   readMPU();
+  float r = calcRoulis();
+  float tang = calcTangage();
+  Serial.print("roulie:");
+  Serial.println(r);
+  Serial.print("tangae:");
+  Serial.println(tang);
   delay(100);
 }
 
@@ -31,26 +40,56 @@ void readMPU( ) { /* function readMPU */
   ////Read acceleromter data
   sensors_event_t a, g, temp;
   mpu.getEvent(&a, &g, &temp);
+  ax = a.acceleration.x;
+  ay = a.acceleration.y;
+  az = a.acceleration.z;
+  gx = g.gyro.x;
+  gy = g.gyro.y;
+  gz = g.gyro.z;
+  t = temp.temperature;
+}
 
+void printParam(){
   /* Print out the values */
   Serial.print("Acceleration X: ");
-  Serial.print(a.acceleration.x);
+  Serial.print(ax);
   Serial.print(", Y: ");
-  Serial.print(a.acceleration.y);
+  Serial.print(ay);
   Serial.print(", Z: ");
-  Serial.print(a.acceleration.z);
+  Serial.print(az);
   Serial.println(" m/s^2");
 
   Serial.print("Rotation X: ");
-  Serial.print(g.gyro.x);
+  Serial.print(gx);
   Serial.print(", Y: ");
-  Serial.print(g.gyro.y);
+  Serial.print(gy);
   Serial.print(", Z: ");
-  Serial.print(g.gyro.z);
+  Serial.print(gz);
   Serial.println(" rad/s");
 
   Serial.print("Temperature: ");
-  Serial.print(temp.temperature);
+  Serial.print(t);
   Serial.println("°C");
+
+
 }
 
+
+float calcRoulis(){
+  return atan2f(ay,sign(az)*sqrt(0.01*(ax*ax)+(az*az)));
+}
+
+
+float calcTangage(){
+  return atan2f(-ax,sqrt((ay*ay)+(az*az)));
+}
+
+
+int sign(float param){
+  if (param >= 0){
+    return 1;
+  }
+  else{
+    return -1;
+  }
+}
