@@ -6,8 +6,8 @@
 #include "Plotter.h"
 
 Plotter p;
-float ax,ay,az,gx,gy,gz,temperature,r = 0,tang = 0,t = 0;
-int time_delay = 100;
+float ax,ay,az,gx,gy,gz,temperature,r,tang,t = 0;
+int time_delay = 10;
 
 //Objects
 Adafruit_MPU6050 mpu;
@@ -15,6 +15,7 @@ Adafruit_MPU6050 mpu;
 void setup() {
   //Init Serial USB
   Serial.begin(115200);
+  
   p.Begin();
   p.AddXYGraph("roulis", 16001, "T", t,"roulis",r);  // graphe pour x
   p.AddXYGraph("tangage", 16001, "T", t,"tangage",tang);  // graphe pour y
@@ -29,13 +30,18 @@ void setup() {
   mpu.setAccelerometerRange(MPU6050_RANGE_16_G);
   mpu.setGyroRange(MPU6050_RANGE_250_DEG);
   mpu.setFilterBandwidth(MPU6050_BAND_21_HZ);
+  readMPU();
+  calcRoulisA();
+  calcTangageA();
 }
 
 void loop() {
-  readMPU();
-  p.Plot();
   delay(time_delay);
   t = t + 0.1;
+  readMPU();
+  calcRoulisAG();
+  calcTangageAG();
+  p.Plot();
 }
 
 void readMPU( ) { /* function readMPU */
@@ -49,9 +55,8 @@ void readMPU( ) { /* function readMPU */
   gy = g.gyro.y;
   gz = g.gyro.z;
   temperature = temp.temperature;
-  calcRoulisG();
-  calcTangageG();
 }
+
 
 void printParam(){
   /* Print out the values */
@@ -79,16 +84,6 @@ void printParam(){
 }
 
 
-void calcRoulisA(){
-  r = atan2f(ay,sign(az)*sqrt(0.01*(ax*ax)+(az*az)));
-}
-
-
-void calcTangageA(){
-  tang = atan2f(-ax,sqrt((ay*ay)+(az*az)));
-}
-
-
 int sign(float param){
   if (param >= 0){
     return 1;
@@ -99,11 +94,41 @@ int sign(float param){
 }
 
 
+void calcRoulisAG(){
+  float alpha = 0.05;
+  calcRoulisG();
+  float rG = r;
+  calcRoulisA();
+  float rA = r;
+  r = ((1-alpha)*rG)+(alpha*rA);
+}
+
+
+void calcTangageAG(){
+  float alpha = 0.05;
+  calcTangageG();
+  float tG = tang;
+  calcTangageA();
+  float tA = tang;
+  tang = ((1-alpha)*tG)+(alpha*tA);
+}
+
+
 void calcRoulisG(){
-  r = r + gx*time_delay;
+  r = r + gx*time_delay/1000;
 }
 
 
 void calcTangageG(){
-  tang = tang + gy*time_delay;
+  tang = tang + gy*time_delay/1000;
+}
+
+
+void calcRoulisA(){
+  r = atan2f(ay,sign(az)*sqrt(0.01*(ax*ax)+(az*az)));
+}
+
+
+void calcTangageA(){
+  tang = atan2f(-ax,sqrt((ay*ay)+(az*az)));
 }
