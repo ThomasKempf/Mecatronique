@@ -16,3 +16,24 @@ nous avons compilé le programme exemple dans le microcontroleur relié au capte
 ## 3 Calcul de l’attitude :
 
 ### Question 1 :
+```c
+void calcRoulis(){
+  r = atan2f(ay,sign(az)*sqrt(0.01*(ax*ax)+(az*az)));
+}
+
+void calcTangage(){
+  tang = atan2f(-ax,sqrt((ay*ay)+(az*az)));
+}
+
+int sign(float param){
+  if (param >= 0){
+    return 1;
+  }
+  else{
+    return -1;
+  }
+}
+```
+
+### Question 2 :
+<img src="./roulis_tang.png" alt="rond" width="300">

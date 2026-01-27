@@ -3,16 +3,21 @@
 #include <Adafruit_MPU6050.h>//https://github.com/adafruit/Adafruit_MPU6050
 #include <Adafruit_Sensor.h>//https://github.com/adafruit/Adafruit_Sensor
 #include <math.h>
+#include "Plotter.h"
 
-float ax,ay,az,gx,gy,gz,t;
+Plotter p;
+float ax,ay,az,gx,gy,gz,temperature,r,tang,t = 0;
 
 //Objects
 Adafruit_MPU6050 mpu;
 
 void setup() {
   //Init Serial USB
-  Serial.begin(9600);
-  Serial.println(F("Initialize System"));
+  Serial.begin(115200);
+  p.Begin();
+  p.AddXYGraph("roulis", 16001, "T", t,"roulis",r);  // graphe pour x
+  p.AddXYGraph("tangage", 16001, "T", t,"tangage",tang);  // graphe pour y
+
  if (!mpu.begin(0x68)) { // Change address if needed
     Serial.println("Failed to find MPU6050 chip");
     while (1) {
@@ -27,13 +32,9 @@ void setup() {
 
 void loop() {
   readMPU();
-  float r = calcRoulis();
-  float tang = calcTangage();
-  Serial.print("roulie:");
-  Serial.println(r);
-  Serial.print("tangae:");
-  Serial.println(tang);
+  p.Plot();
   delay(100);
+  t = t + 0.1;
 }
 
 void readMPU( ) { /* function readMPU */
@@ -46,7 +47,9 @@ void readMPU( ) { /* function readMPU */
   gx = g.gyro.x;
   gy = g.gyro.y;
   gz = g.gyro.z;
-  t = temp.temperature;
+  temperature = temp.temperature;
+  calcRoulis();
+  calcTangage();
 }
 
 void printParam(){
@@ -68,20 +71,20 @@ void printParam(){
   Serial.println(" rad/s");
 
   Serial.print("Temperature: ");
-  Serial.print(t);
+  Serial.print(temperature);
   Serial.println("°C");
 
 
 }
 
 
-float calcRoulis(){
-  return atan2f(ay,sign(az)*sqrt(0.01*(ax*ax)+(az*az)));
+void calcRoulis(){
+  r = atan2f(ay,sign(az)*sqrt(0.01*(ax*ax)+(az*az)));
 }
 
 
-float calcTangage(){
-  return atan2f(-ax,sqrt((ay*ay)+(az*az)));
+void calcTangage(){
+  tang = atan2f(-ax,sqrt((ay*ay)+(az*az)));
 }
 
 
