@@ -37,3 +37,15 @@ int sign(float param){
 
 ### Question 2 :
 <img src="./roulis_tang.png" alt="rond" width="300">
+
+### Question 3 :
+```c
+void calcRoulisG(){
+  r = r + gx*time_delay;
+}
+
+void calcTangageG(){
+  tang = tang + gy*time_delay;
+}
+```
+<img src="./calc_giro.png" alt="rond" width="300">

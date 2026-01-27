@@ -6,7 +6,8 @@
 #include "Plotter.h"
 
 Plotter p;
-float ax,ay,az,gx,gy,gz,temperature,r,tang,t = 0;
+float ax,ay,az,gx,gy,gz,temperature,r = 0,tang = 0,t = 0;
+int time_delay = 100;
 
 //Objects
 Adafruit_MPU6050 mpu;
@@ -33,7 +34,7 @@ void setup() {
 void loop() {
   readMPU();
   p.Plot();
-  delay(100);
+  delay(time_delay);
   t = t + 0.1;
 }
 
@@ -48,8 +49,8 @@ void readMPU( ) { /* function readMPU */
   gy = g.gyro.y;
   gz = g.gyro.z;
   temperature = temp.temperature;
-  calcRoulis();
-  calcTangage();
+  calcRoulisG();
+  calcTangageG();
 }
 
 void printParam(){
@@ -78,12 +79,12 @@ void printParam(){
 }
 
 
-void calcRoulis(){
+void calcRoulisA(){
   r = atan2f(ay,sign(az)*sqrt(0.01*(ax*ax)+(az*az)));
 }
 
 
-void calcTangage(){
+void calcTangageA(){
   tang = atan2f(-ax,sqrt((ay*ay)+(az*az)));
 }
 
@@ -95,4 +96,14 @@ int sign(float param){
   else{
     return -1;
   }
+}
+
+
+void calcRoulisG(){
+  r = r + gx*time_delay;
+}
+
+
+void calcTangageG(){
+  tang = tang + gy*time_delay;
 }
